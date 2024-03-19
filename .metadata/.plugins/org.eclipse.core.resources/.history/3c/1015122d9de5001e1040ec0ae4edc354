@@ -1,0 +1,24 @@
+package com.ict.edu.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ict.edu.service.Test01Service;
+
+@Controller
+public class Test01Controller {
+	
+	@GetMapping("hello.do")
+	public ModelAndView HelloCommand(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("test01/result");
+		Test01Service service = new Test01Service();
+		String msg = service.getGreeting();
+		mv.addObject("msg", msg);
+		
+		return mv;
+	}
+}

@@ -1,0 +1,8 @@
+package com.ict.ex01;
+
+public class MariaDBDAO implements DAO{
+	@Override
+	public void prn() {
+		
+	}
+}

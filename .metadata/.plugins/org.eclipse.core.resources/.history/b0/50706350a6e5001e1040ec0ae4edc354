@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>결과보기</h2>
+	<h2>${s1} ${op} ${s2} = ${result}</h2>
+	<h2>${cPage}</h2>
+	<hr>
+
+	<h2>결과보기</h2>
+	<h2>${vo.s1} ${vo.op} ${vo.s2} = ${vo.result}</h2>
+	<h2>${vo.cPage}</h2>
+	
+</body>
+</html>

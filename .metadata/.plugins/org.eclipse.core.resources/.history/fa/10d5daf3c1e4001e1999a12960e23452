@@ -1,0 +1,7 @@
+package com.ict.ex03;
+
+public class TestMain_DI {
+	public static void main(String[] args) {
+		
+	}
+}

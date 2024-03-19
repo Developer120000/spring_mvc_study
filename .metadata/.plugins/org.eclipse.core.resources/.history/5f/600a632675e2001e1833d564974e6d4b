@@ -1,0 +1,10 @@
+package com.ict.ex01;
+
+public class Service {
+	
+	
+	// 사용하고 싶은 메소드
+	public void biz() {
+		// OracleDAO, MariaDBDAO 의 prn 메소드 실행 
+	}
+}

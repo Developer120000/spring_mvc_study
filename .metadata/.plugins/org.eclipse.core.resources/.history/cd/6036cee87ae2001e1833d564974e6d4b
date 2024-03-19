@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- DI - 객체 생성 -->
+	<!-- OracleDAO oracledao = new OracleDAO(); -->
+	<!-- id : , class=리절트타입이나 파라미터타입처럼 클래스 위치적어줌 -->
+	<bean id="oracledao" class="com.ict.ex02.OracleDAO"></bean>
+	<bean id="MariaDBdao" class="com.ict.ex02.MariaDBDAO"></bean>
+	<bean id="service" class="com.ict.ex02.Service"</bean>
+</beans>

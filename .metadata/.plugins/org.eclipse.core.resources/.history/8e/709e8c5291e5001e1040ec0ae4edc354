@@ -1,0 +1,16 @@
+package com.ict.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class Start3Controller {
+	public ModelAndView exec(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("");
+		
+		return mv;
+	}
+}

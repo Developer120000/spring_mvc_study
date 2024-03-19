@@ -1,0 +1,8 @@
+package com.ict.ex03;
+
+public class MyProcess {
+	private String name = "홍길동";
+	private int age = 13;
+	
+	public MyProcess() {};
+}

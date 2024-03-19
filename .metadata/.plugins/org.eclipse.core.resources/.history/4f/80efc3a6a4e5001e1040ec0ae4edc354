@@ -1,0 +1,5 @@
+package com.ict.edu2.vo;
+
+public class VO {
+	private String s1, s2, op, cPage, result;
+}

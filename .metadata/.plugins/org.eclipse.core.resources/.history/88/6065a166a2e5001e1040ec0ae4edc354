@@ -1,0 +1,20 @@
+package com.ict.edu2.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class Test02Controller {
+	
+	@PostMapping("calc.do")
+	public ModelAndView calc(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView("");
+		
+		return mv;
+	}
+	
+}

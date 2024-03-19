@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 어노테이션 지정 방법 -->
+	<!-- 1. Namespaces 에 가서 context 추가 -->
+	<!-- 2. <context:annotation-config /> 추가 -->
+	<!-- 3. <context:component-scan basc-package="어노테이션 할 패키지" -->
+	
+	<!-- 기본생성자를 이용한 DI -->
+<!-- 	<bean id="mp1" class="com.ict.ex05.MyProcess"></bean> -->
+	
+	<!-- 생성자를 이용한 DI -->
+<!-- 	<bean id="mp2" class="com.ict.ex05.MyProcess"> -->
+<!-- 		<constructor-arg name="name" value="일지매" /> -->
+<!-- 		<constructor-arg name="age" value="42" /> -->
+<!-- 	</bean> -->
+	
+	<!-- setter 를 이용한 DI -->
+<!-- 	<bean id="mp3" class="com.ict.ex05.MyProcess"> -->
+<!-- 		<property name="name" value="장길산" /> -->
+<!-- 		<property name="age" value="32" /> -->
+		<!-- 현재까지는 set 으로 값만 넣어준거고 메소드 실행한거는 아님 메인에서 실행 -->
+<!-- 	</bean> -->
+</beans>

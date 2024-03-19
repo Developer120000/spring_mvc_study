@@ -1,0 +1,12 @@
+package com.ict.ex04;
+
+public class Age {
+	// 주민번호를 받아서 나이를 계산하자
+	// gender 1 또는 2 이면 1900년대 태어난 사람
+	// gender 3 또는 4 이면 2000년대 태어난 사람
+	public int count(String jumin, String gender) {
+		int result = 0;
+		
+		return result;
+	}
+}

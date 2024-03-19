@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 기본생성자를 이용한 DI -->
+	<bean id="mp1" class="com.ict.ex03.MyProcess"></bean>
+	
+	<!-- 생성자를 이용한 DI -->
+	<bean id="mp2" class="com.ict.ex03.MyProcess">
+		<constructor-arg name="name" value="일지매" />
+		<constructor-arg name="age" value="42" />
+	</bean>
+	
+	<!-- setter 를 이용한 DI -->
+	<bean id="mp3" class="com.ict.ex03.MyProcess">
+		<property name="name" value="장길산" />
+		<property name="age" value="32" />
+		<!-- 현재까지는 set 으로 값만 넣어준거고 실행한거는 아님 -->
+	</bean>
+</beans>

@@ -1,0 +1,5 @@
+package com.ict.ex04;
+
+public class TestMain_nonDI {
+
+}

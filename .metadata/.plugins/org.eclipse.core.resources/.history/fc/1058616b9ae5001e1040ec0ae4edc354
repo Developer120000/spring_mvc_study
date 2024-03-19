@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>First Spring MVC</h1>
+	<!-- 확장자가 .do 이름 이므로 web.xml 에서 지정한 servlet-context.xml (DispatcherServlet) 으로 간다 -->
+	<h2><a href="start1.do">Start1</a></h2>
+	<h2><a href="start2.do">Start2</a></h2>
+	<h2><a href="start3.do">Start3</a></h2>
+	<h2><a href="start4.do">Start4</a></h2>
+	<h2><a href="start5.do">Start5</a></h2>
+	<h2><a href="start6.do">Start6</a></h2>
+	<hr>
+	<h2><a href="hello.do">인사하기</a></h2>
+		
+</body>
+</html>

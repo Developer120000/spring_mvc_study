@@ -1,0 +1,11 @@
+package com.ict.ex01;
+
+public class SpringBasic {
+	// 스프링 주요 기능
+	// - DI : 모듈간의 의존성을 모듈의 외부(컨테이너) 에게 주입시키는 기능, IoC 의 한 종류이다.
+	//		  IoC(Inversion of Control) : 제어의 역전, 역제어
+	//		  - 어떤 모듈이 사용할 모듈을 스스로 결정하는 것이 아니라 다른 모듈에게 선택권을 넘겨준다는 것을 의미
+	// - AOP : 
+	// - MVC : 
+	
+}

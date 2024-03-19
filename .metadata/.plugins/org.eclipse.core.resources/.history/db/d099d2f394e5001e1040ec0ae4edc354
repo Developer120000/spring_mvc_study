@@ -1,0 +1,19 @@
+package com.ict.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class Start4Comtroller {
+	
+	// 컨트롤러 메소드의 반환형은 String 또는 ModelAndView 이다.
+	public String  exec(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("computer", "14세대 i7");
+		
+		return "result4";
+	}
+}

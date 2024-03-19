@@ -1,0 +1,34 @@
+package com.ict.ex06;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Service {
+	// 인터페이스 또는 클래스를 자료형으로 사용
+	// 변수이름과 참조하는 클래스의 id가 같을 때 사용 @Autowired
+	@Autowired
+	// 같은 이름이 없을 때는 참조하는 클래스의 id를 입력한다. @Qualifier("첫글자 소문자")
+	@Qualifier("mariaDBDAO")
+	private DAO dao;
+	
+	public Service() {	}
+	// 기본생성자에 인터페이스 들어오면 디스사용해서 전역변수로 넘긴다.
+	public Service(DAO dao) {
+		this.dao = dao;
+	}
+	
+	public DAO getDao() {
+		return dao;
+	}
+	public void setDao(DAO dao) {
+		this.dao = dao;
+	}
+	
+	// 사용하고 싶은 메소드
+	public void biz() {
+		dao.prn();
+		
+	}
+}

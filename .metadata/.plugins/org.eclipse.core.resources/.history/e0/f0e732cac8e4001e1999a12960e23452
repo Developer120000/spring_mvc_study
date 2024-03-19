@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="age" class="com.ict.ex04.Age"></bean>
+	
+	<bean id="mp" class="com.ict.ex04.MyProcess">
+		<constructor-arg name="name" value="" />
+		<constructor-arg name="jumin" value="" />
+		<constructor-arg name="gender" value="" />
+		<constructor-arg name="" ref="" /> <!-- set이 아니라 참조 -->
+	</bean>
+	
+	<bean>
+		<property name=""></property>
+	</bean>
+</beans>

@@ -1,0 +1,14 @@
+package com.ict.ex01;
+
+public class TestMain {
+	public static void main(String[] args) {
+		// 1. 기존 자바 방식
+//		Service service = new Service();
+//		service.biz();
+		
+		
+		Service service = new Service(new OracleDAO());
+		service.biz();
+		
+	}
+}
