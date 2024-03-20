@@ -1,0 +1,11 @@
+package com.ict.edu4.service;
+
+public class DAO {
+	private SqlSessionTemplate sqlSessionTemplate;
+
+	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate = sqlSessionTemplate;
+	}
+	
+	
+}

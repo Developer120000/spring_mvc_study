@@ -1,0 +1,69 @@
+package com.ict.edu3.controller;
+
+import java.io.File;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+@Controller
+public class FileController {
+	
+	// cos 라이브러리 사용
+	@PostMapping("f_up.do")
+	public ModelAndView fileUp(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			ModelAndView mv = new ModelAndView("test03/result");
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
+			MultipartRequest mr = 
+					new MultipartRequest(request, path, 500*1024*1024, "utf-8", new DefaultFileRenamePolicy());
+			String name = mr.getParameter("name");
+			String f_name = mr.getFilesystemName("f_name");
+			String file_type = mr.getContentType("f_name");
+			
+			File file = mr.getFile("f_name");
+			long size = file.length()/1024; // 위에거 MB 로 업로드한걸 1024 나눠서 표시는 KB 로 
+			SimpleDateFormat sdf = new SimpleDateFormat("yy.mm.dd hh:mm:ss E"); // 년월일 시분초 요일
+			String lastday = sdf.format(file.lastModified()); // 수정 마지막날
+			
+			mv.addObject("name", name);
+			mv.addObject("f_name", f_name);
+			mv.addObject("file_type", file_type);
+			mv.addObject("size", size);
+			mv.addObject("lastday", lastday);
+			
+			return mv;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	// 다운로드
+	@GetMapping("down.do")
+	public void fileDown(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			String f_name = request.getParameter("f_name");
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload" + f_name);
+			// 한글처리
+			String r_path = URLEncoder.encode(path, "utf-8");
+			
+			// 브라우저 설정
+			response.setContentType("application/x-msdownload");
+			response.setHeader("Content-Disposition", "attachment; filename=" + r_path);
+			
+			File file = new File(new String(path.getBytes(), "utf-8"));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+}
