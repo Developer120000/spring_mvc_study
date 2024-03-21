@@ -1,5 +1,7 @@
 package com.ict.edu4.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
 public class DAO {
@@ -10,4 +12,14 @@ public class DAO {
 	}
 	
 	// 리스트
+	public List<VO> getList(){
+		try {
+			List<VO> list = null;
+			list = sqlSessionTemplate.selectList("members.list");
+			return list;
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
 }

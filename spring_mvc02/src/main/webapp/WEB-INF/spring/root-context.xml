@@ -6,7 +6,7 @@
 	<!-- 오라클 접속 정보 입력 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<property name="url" value="jdbc:orcle:thin:@localhost:1521:xe" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
 		<property name="username" value="c##ictedu" />
 		<property name="password" value="1111" />
 	</bean>
@@ -15,7 +15,7 @@
 	<!-- 오토와이어 때문에 위에 id 랑 같은 이름 사용한다 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations" value="classpath*:com/ict/edu4/service/mapper.xml" />
+		<property name="mapperLocations" value="classpath*:com/ict/*/service/*_mapper.xml" /><!-- 메퍼 여러개 필요할때 다른고은 *로 -->
 	</bean>
 	
 	<!-- mybatis : SqlSessionTemplate (실제 실행하는 클래스) -->
@@ -29,7 +29,10 @@
 	<!-- DAO 에 위에 클래스 SqlSessionTemplate 가 있어야한다. -->
 	<!-- SqlSessionTemplate 전역변수를 name 에 쓴다 그래야 오토와이어 된다 -->
 	<!-- name, ref 를 위 id 에 기입한다 -->
-	<bean id="" class="com.ict.edu4.service.DAO">
+	<bean id="dao" class="com.ict.edu4.service.DAO">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</bean>
+	<bean id="guestBookDAO" class="com.ict.guestbook.service.GuestBookDAO">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</bean>
 </beans>

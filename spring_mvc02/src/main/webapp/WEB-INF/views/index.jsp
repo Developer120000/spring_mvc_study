@@ -14,7 +14,10 @@
 		location.href="oracle_list.do";
 	}
 	function maria_list() {
-		location.href="maria_list.do";	
+		location.href="maria_list.do";
+	}
+	function guestbook_go() {
+		location.href="guestbook_go.do";	
 	}
 </script>
 </head>
@@ -84,6 +87,7 @@
 	<hr>
 	<button onclick="oracle_list()">오라클 UserMembers list 보기</button>
 	<button onclick="maria_list()">MariaDB UserMembers list 보기</button>
+	<button onclick="guestbook_go()">guestbook</button>
 	
 </body>
 </html>
