@@ -2,5 +2,6 @@
 <aop-reference-model>
 <aop-project name="spring_mvc02"/>
 <aop-project name="spring_mvc03"/>
+<aop-project name="spring_mvc04"/>
 <aop-project name="spring_basic"/>
 </aop-reference-model>
