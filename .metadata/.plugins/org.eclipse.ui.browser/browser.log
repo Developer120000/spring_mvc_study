@@ -7,3 +7,7 @@
 3월 21, 2024 11:19:33.409 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 3월 21, 2024 11:36:42.198 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
 3월 21, 2024 17:55:57.138 [13992:1588:0321/175557.138:ERROR:interface_endpoint_client.cc(707)] Message 5 rejected by interface blink.mojom.WidgetHost
+
+3월 23, 2024 09:08:38.332 NEW SESSION
+3월 23, 2024 09:08:38.332 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+3월 23, 2024 09:50:43.170 INFO: Created TensorFlow Lite XNNPACK delegate for CPU.

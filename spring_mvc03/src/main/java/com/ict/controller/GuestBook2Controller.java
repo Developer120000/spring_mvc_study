@@ -148,9 +148,9 @@ public class GuestBook2Controller {
 		// passwordEncoder.matches(비암호화 비번, 암호화 비번)
 		// 일치하면 true, 아니면 false
 		if(! passwordEncoder.matches(cpwd, dpwd)) {
-			mv.setViewName("delete");
-			mv.addObject("pwdchk", "fail");
-			mv.addObject("vo2", vo);
+			mv.setViewName("delete"); // 다시 delete 뷰 페이지로
+			mv.addObject("pwdchk", "fail"); // pwdchk 데이터이름, fail 데이터
+			mv.addObject("vo2", vo); // 해당 상세글 다시 보여주기
 			return mv;
 		}else {
 			int result = guestBook2Service.getGuestBook2Delete(vo.getIdx());

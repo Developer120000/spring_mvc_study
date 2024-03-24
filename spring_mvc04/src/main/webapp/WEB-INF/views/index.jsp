@@ -12,6 +12,6 @@
 </script>
 </head>
 <body>
-	<button onclick="send_go()">Guestbook2</button>
+	<button onclick="send_go()">Guestbook</button>
 </body>
 </html>
