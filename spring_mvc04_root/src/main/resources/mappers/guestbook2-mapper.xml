@@ -12,8 +12,8 @@
  		values(guestbook_seq.nextval, #{name},#{subject},#{content},#{email},#{pwd},sysdate)
  	</insert> -->
  	<insert id="insert" parameterType="g2vo">
- 		insert into guestbook2(name,subject,content,email,pwd,regdate)
- 		values( #{name},#{subject},#{content},#{email},#{pwd},sysdate())
+ 		insert into guestbook2(name,subject,content,email,pwd,f_name,regdate)
+ 		values(#{name},#{subject},#{content},#{email},#{pwd},#{f_name},sysdate())
  	</insert>
  	<select id="detail" parameterType="String" resultType="g2vo">
  		select * from guestbook2 where idx = #{idx}
@@ -23,7 +23,7 @@
  	</delete>
  	<update id="update" parameterType="g2vo">
  		update guestbook2
- 		set name=#{name}, subject=#{subject}, email=#{email}, content=#{content}
+ 		set name=#{name}, subject=#{subject}, email=#{email}, f_name=#{f_name}, content=#{content}
  		where idx = #{idx}
  	</update>
  </mapper>
