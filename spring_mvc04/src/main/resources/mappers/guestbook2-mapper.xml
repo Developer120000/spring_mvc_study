@@ -21,7 +21,7 @@
   		delete from guestbook2 where idx = #{idx}
   	</delete>
   	
-  	<update id="update" parameterType="vo">
+  	<update id="update" parameterType="vo2">
   		update guestbook2
   		set name=#{name}, subject=#{subject}, email=#{email}, 
  		  f_name=#{f_name}, content = #{content} 

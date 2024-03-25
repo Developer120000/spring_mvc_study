@@ -39,7 +39,7 @@ public class GuestBook2Controller {
 			mv.addObject("list", list);
 			return mv;
 		}
-		return new ModelAndView("error");
+		return new ModelAndView("guestbook2/error");
 	}
 	
 	@GetMapping("gb2_write.do")
@@ -73,11 +73,11 @@ public class GuestBook2Controller {
 			if(result > 0) {
 				return mv;
 			}
-			return new ModelAndView("error");
+			return new ModelAndView("guestbook2/error");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return new ModelAndView("error");
+		return new ModelAndView("guestbook2/error");
 	}
 	
 	@GetMapping("gb2_detail.do")
@@ -89,7 +89,7 @@ public class GuestBook2Controller {
 			mv.addObject("vo", vo);
 			return mv;
 		}
-		return new ModelAndView("error");
+		return new ModelAndView("guestbook2/error");
 	}
 	
 	@GetMapping("gb2_down.do")
@@ -137,7 +137,7 @@ public class GuestBook2Controller {
 				return mv;
 			}
 		}
-		return new ModelAndView("error");
+		return new ModelAndView("guestbook2/error");
 	}
 	
 	@PostMapping("gb2_update.do")
@@ -148,7 +148,7 @@ public class GuestBook2Controller {
 			mv.addObject("vo", vo);
 			return mv;
 		}
-		return new ModelAndView("error");
+		return new ModelAndView("guestbook2/error");
 	}
 	
 	@PostMapping("gb2_update_ok")
@@ -186,11 +186,11 @@ public class GuestBook2Controller {
 					mv.setViewName("redirect:gb2_detail.do?idx=" + vo.getIdx());
 					return mv;
 				}
-				return new ModelAndView("error");
+				return new ModelAndView("guestbook2/error");
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
-		return new ModelAndView("error");
+		return new ModelAndView("guestbook2/error");
 	}
 }

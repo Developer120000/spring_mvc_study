@@ -7,11 +7,15 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function send_go() {
+		location.href="gb_list.do";
+	}
+	function send_go2() {
 		location.href="gb2_list.do";
 	}
 </script>
 </head>
 <body>
 	<button onclick="send_go()">Guestbook</button>
+	<button onclick="send_go2()">Guestbook2</button>
 </body>
 </html>
