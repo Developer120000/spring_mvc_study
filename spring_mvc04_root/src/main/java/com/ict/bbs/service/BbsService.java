@@ -25,10 +25,10 @@ public interface BbsService {
 	public int getHitUpdate(String b_idx);
 	
 	// 페이징 처리 - 전체 게시물의 수
-	
+	public int getTotalCount();
 	
 	// 페이징 처리를 위한 리스트
-	
+	public List<BbsVO> getBbsList(int Offset, int limit);
 	
 	// 댓글 가져오기
 	public List<CommentVO> getCommentList(String b_idx);

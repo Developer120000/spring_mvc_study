@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ict.bbs.dao.BbsVO;
 import com.ict.bbs.dao.CommentVO;
 import com.ict.bbs.service.BbsService;
+import com.ict.common.Paging;
 
 @Controller
 public class BbsController {
@@ -27,11 +28,14 @@ public class BbsController {
 	private BbsService bbsService;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	private Paging paging;
 	
 	@RequestMapping("bbs_list.do")
-	public ModelAndView getBbsList() {
+	public ModelAndView getBbsList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("bbs/list");
-		
+		// 페이징 기법 이전
+		/*
 		List<BbsVO> list = bbsService.getBbsList();
 		
 		if(list != null) {
@@ -39,6 +43,43 @@ public class BbsController {
 			return mv;
 		}
 		return new ModelAndView("bbs/error");
+		*/
+		
+		// 전체 게시물의 수를 구한다. 그래야 페이지의 수를 정할수 있다.
+		int count = bbsService.getTotalCount();
+		paging.setTotalRecord(count);
+		
+		// 전체 페이지의 수를 구하자.
+		if(paging.getTotalRecord() <= paging.getNumPerPage()) {
+			// 게시물의 수가 10보다 작으면 페이지는 1이다
+			paging.setTotalPage(1);
+		}else {
+			// 게시물 수가 10보다 많을때 (게시물의 수 / 10) 페이지 수
+			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
+			// 나머지가 있을 시에 1페이지 추가
+			if(paging.getTotalPage() % paging.getNumPerPage() != 0) {
+				paging.setTotalPage(paging.getTotalPage() + 1);
+			}
+		}
+		
+		// 현재 페이지 구해야 begin, end 를 구한다.
+		String cPage = request.getParameter("cPage");
+		// 맨 처음에 페이지로 들어오면 cPage 가 없으므로 null 이다.
+		// 맨 처음 오면 무조건 1 페이지 이다.
+		if(cPage == null) {
+			paging.setNowPage(1);
+		}else {
+			// cPage 는 String 이라 인트로 형변환
+			paging.setNowBlock(Integer.parseInt(cPage));
+		}
+		// 오라클은 begin, end 사용
+		// 마리아DB 는 limit, offset 사용
+		// offset = limit * (현재 페이지 -1)
+		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() -1));
+		
+		List<BbsVO> bbs_list = bbsService.getBbsList(paging.getOffset(), paging.getNumPerPage());
+		System.out.println(bbs_list.size());
+		return mv;
 	}
 	
 	@GetMapping("bbs_write.do")

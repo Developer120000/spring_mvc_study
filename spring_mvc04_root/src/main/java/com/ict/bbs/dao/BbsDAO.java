@@ -1,6 +1,8 @@
 package com.ict.bbs.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +75,28 @@ public class BbsDAO {
 			System.out.println(e);
 		}
 		return -1;
+	}
+	
+	public int getTotalCount() {
+		try {
+			return sqlSessionTemplate.selectOne("bbs.count");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	public List<BbsVO> getBbsList(int Offset, int limit) {
+		try {
+			// offset, limit 는 VO 에 없어서 파라미터를 map 으로 넣어야한다
+			// VO 에 넣는 방법도 가능
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("offset", Offset);
+			map.put("limit", limit);
+			return sqlSessionTemplate.selectList("bbs.list", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
 	}
 }

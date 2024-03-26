@@ -60,4 +60,14 @@ public class BbsServiceImpl implements BbsService{
 		return bbsDAO.getCommentDelete(c_idx);
 	}
 
+	@Override
+	public int getTotalCount() {
+		return bbsDAO.getTotalCount();
+	}
+
+	@Override
+	public List<BbsVO> getBbsList(int Offset, int limit) {
+		return bbsDAO.getBbsList(Offset, limit);
+	}
+	
 }

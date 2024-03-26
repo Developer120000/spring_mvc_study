@@ -30,4 +30,12 @@
 	<delete id="commentdelete" parameterType="String">
 		delete from comment_t where c_idx = #{c_idx}
 	</delete>
+	
+	<select id="count" resultType="int">
+		select count(*) from bbs_t
+	</select>
+	
+	<select id="list" parameterType="Map" resultType="bvo">
+		select * from bbs_t order by b_idx desc limit #{limit} offset #{offset}
+	</select>
  </mapper>
