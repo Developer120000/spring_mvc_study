@@ -16,11 +16,14 @@
 	<typeAliases>
 		<typeAlias type="com.ict.guestbook.dao.GuestBookVO" alias="gvo" />
 		<typeAlias type="com.ict.guestbook2.dao.GuestBook2VO" alias="vo2" />
+		<typeAlias type="com.ict.bbs.dao.BbsVO" alias="bvo" />
+		<typeAlias type="com.ict.bbs.dao.CommentVO" alias="cvo" />
 	</typeAliases>
 	
 	<!-- 메퍼 위치 -->
 	<mappers>
 		<mapper resource="mappers/guestbook-mapper.xml" />
 		<mapper resource="mappers/guestbook2-mapper.xml" />
+		<mapper resource="mappers/bbs-mapper.xml" />
 	</mappers>
 </configuration>
