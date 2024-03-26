@@ -27,7 +27,7 @@ public class GuestBookController {
 		return new ModelAndView("index");
 	}
 	
-	@GetMapping("/gb_list.do")
+	@GetMapping("gb_list.do")
 	public ModelAndView getGeustBookList() {
 		ModelAndView mv = new ModelAndView("guestbook/list");
 		List<GuestBookVO> list = guestBookService.getGuestList();
@@ -45,7 +45,7 @@ public class GuestBookController {
 	
 	@PostMapping("gb_write_ok.do")
 	public ModelAndView getGuestBookInsertOK(GuestBookVO gvo) {
-		ModelAndView mv = new ModelAndView("redirect:/gb_list.do");
+		ModelAndView mv = new ModelAndView("redirect:gb_list.do");
 		
 		// 비번암호화
 		String pwd = passwordEncoder.encode(gvo.getPwd());
@@ -106,7 +106,7 @@ public class GuestBookController {
 		}else {
 			int result = guestBookService.getGuestDelete(gvo.getIdx());
 			if(result > 0) {
-				mv.setViewName("redirect:/gb_list.do");
+				mv.setViewName("redirect:gb_list.do");
 				return mv;
 			}
 			mv.setViewName("guestbook/error");	

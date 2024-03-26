@@ -19,12 +19,8 @@ public class GuestBook2Controller {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	@GetMapping("/")
-	public ModelAndView getGeustBookIndex() {
-		return new ModelAndView("index");
-	}
-	
-	@GetMapping("/gb2_list.do")
+
+	@GetMapping("gb2_list.do")
 	public ModelAndView getGeustBook2List() {
 		ModelAndView mv = new ModelAndView("guestbook2/list");
 		List<GuestBook2VO> list = guestBook2Service.getGuestBook2List();

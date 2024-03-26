@@ -11,19 +11,19 @@
  		insert into guestbook(idx,name,subject,content,email,pwd,regdate)
  		values(guestbook_seq.nextval, #{name},#{subject},#{content},#{email},#{pwd},sysdate)
  	</insert> -->
- 	<insert id="insert" parameterType="g2vo">
- 		insert into guestbook2(name,subject,content,email,pwd,f_name,regdate)
- 		values(#{name},#{subject},#{content},#{email},#{pwd},#{f_name},sysdate())
- 	</insert>
- 	<select id="detail" parameterType="String" resultType="g2vo">
- 		select * from guestbook2 where idx = #{idx}
- 	</select>
- 	<delete id="delete" parameterType="String">
- 		delete from guestbook2 where idx = #{idx}
- 	</delete>
- 	<update id="update" parameterType="g2vo">
- 		update guestbook2
- 		set name=#{name}, subject=#{subject}, email=#{email}, f_name=#{f_name}, content=#{content}
- 		where idx = #{idx}
- 	</update>
+<!--  	<insert id="insert" parameterType="g2vo"> -->
+<!--  		insert into guestbook2(name,subject,content,email,pwd,f_name,regdate) -->
+<!--  		values(#{name},#{subject},#{content},#{email},#{pwd},#{f_name},sysdate()) -->
+<!--  	</insert> -->
+<!--  	<select id="detail" parameterType="String" resultType="g2vo"> -->
+<!--  		select * from guestbook2 where idx = #{idx} -->
+<!--  	</select> -->
+<!--  	<delete id="delete" parameterType="String"> -->
+<!--  		delete from guestbook2 where idx = #{idx} -->
+<!--  	</delete> -->
+<!--  	<update id="update" parameterType="g2vo"> -->
+<!--  		update guestbook2 -->
+<!--  		set name=#{name}, subject=#{subject}, email=#{email}, f_name=#{f_name}, content=#{content} -->
+<!--  		where idx = #{idx} -->
+<!--  	</update> -->
  </mapper>
