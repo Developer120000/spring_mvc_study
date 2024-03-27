@@ -25,7 +25,6 @@ INDEX VERSION 1.131+D:\JS\spring_mvc_study\.metadata\.plugins\org.eclipse.jdt.co
 153030098.index
 2395874677.index
 4033502173.index
-322786091.index
 3143175723.index
 82823027.index
 479806445.index
@@ -50,12 +49,9 @@ INDEX VERSION 1.131+D:\JS\spring_mvc_study\.metadata\.plugins\org.eclipse.jdt.co
 2174220913.index
 1522727691.index
 3296142748.index
-1083686725.index
 1171769348.index
-932220883.index
 894902678.index
 3549665228.index
-2929319529.index
 1031553675.index
 3270877507.index
 2348011901.index

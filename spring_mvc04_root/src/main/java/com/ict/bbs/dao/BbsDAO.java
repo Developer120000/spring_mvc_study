@@ -99,4 +99,16 @@ public class BbsDAO {
 		}
 		return null;
 	}
+	
+	public int getBbsDelete(String b_idx) {
+		try {
+			// 댓글있는 원글 삭제 오류
+			// return sqlSessionTemplate.delete("bbs.bbsdelete", b_idx);
+			// 댓글있는 원글 삭제하려면 쿼리문은 업데이트로 작성
+			return sqlSessionTemplate.update("bbs.bbsdelete", b_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
 }

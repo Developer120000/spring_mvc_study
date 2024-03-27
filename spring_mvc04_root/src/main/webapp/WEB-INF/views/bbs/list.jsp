@@ -95,14 +95,25 @@ table tfoot ol.paging li a:hover {
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${empty list }">
+					<c:when test="${empty bbs_list }">
 						<tr><td colspan="5"><h3>게시물이 존재하지 않습니다</h3></td></tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="k" items="${list }" varStatus="vs">
+						<c:forEach var="k" items="${bbs_list }" varStatus="vs">
 							<tr>
 								<td>${vs.count }</td>
-								<td><a href="bbs_detail.do?b_idx=${k.b_idx}">${k.subject }</a></td>
+								<!-- 2페이지에서 댓글달고 목록눌르면 다시 1페이지로 가기때문에 detail 에도 &cPage=${paging.nowPage} 넘겨줘야된다. -->
+								<td>
+									<c:choose>
+										<c:when test="${k.active == 1 }">
+											<span style="color: lightgray">삭제된 게시물</span>
+										</c:when>
+										<c:otherwise>
+											<!-- 삭제된 게시물이 아니면 상세보기 되어야하니까 링크 O -->
+											<a href="bbs_detail.do?b_idx=${k.b_idx}&cPage=${paging.nowPage}">${k.subject }</a>
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td>${k.writer }</td>
 								<td>${k.write_date.substring(0,10) }</td>
 								<td>${k.hit }</td>
@@ -117,8 +128,33 @@ table tfoot ol.paging li a:hover {
 					<td colspan="4">
 						<ol class="paging">
 							<!-- 이전 -->
+							<c:choose>
+								<c:when test="${paging.beginBlock <= paging.pagePerBlock }">
+									<li class="disable">이전으로</li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="bbs_list.do?cPage=${paging.beginBlock - paging.pagePerBlock }">이전으로</a></li>
+								</c:otherwise>
+							</c:choose>
 						    <!-- 블록안에 들어간 페이지번호들 -->
+						    <c:forEach begin="${paging.beginBlock }" end="${paging.endBlock }" step="1" var="k">
+						    	<%-- 현재 페이지이면 링크 X, 나머지 페이지들은 링크 O --%>
+						    	<c:if test="${k == paging.nowPage }">
+						    		<li class="now">${k }</li>
+						    	</c:if>
+						    	<c:if test="${k != paging.nowPage }">
+						    		<li><a href="bbs_list.do?cPage=${k }">${k }</a></li>
+						    	</c:if>
+						    </c:forEach>
 							<!-- 다음 -->
+							<c:choose>
+								<c:when test="${paging.endBlock >= paging.totalPage }">
+									<li class="disable">다음으로</li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="bbs_list.do?cPage=${paging.beginBlock + paging.pagePerBlock }">다음으로</a></li>
+								</c:otherwise>
+							</c:choose>
 						</ol>
 					</td>
 					<td>

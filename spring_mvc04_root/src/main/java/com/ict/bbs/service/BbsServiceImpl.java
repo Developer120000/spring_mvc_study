@@ -37,7 +37,7 @@ public class BbsServiceImpl implements BbsService{
 	
 	@Override
 	public int getBbsDelete(String b_idx) {
-		return 0;
+		return bbsDAO.getBbsDelete(b_idx);
 	}
 
 	@Override

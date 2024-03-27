@@ -3,12 +3,21 @@ package com.ict.bbs.dao;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BbsVO {
-	private String b_idx, subject, writer, content, f_name, pwd, write_date, hit;
+	private String b_idx, subject, writer, content, f_name, pwd, write_date, hit, active;
 
 	// write.jsp 에서 file_name 사용
 	private MultipartFile file_name;
 	
 	
+	
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
 	public MultipartFile getFile_name() {
 		return file_name;
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -70,15 +71,27 @@ public class BbsController {
 			paging.setNowPage(1);
 		}else {
 			// cPage 는 String 이라 인트로 형변환
-			paging.setNowBlock(Integer.parseInt(cPage));
+			paging.setNowPage(Integer.parseInt(cPage));
 		}
 		// 오라클은 begin, end 사용
 		// 마리아DB 는 limit, offset 사용
 		// offset = limit * (현재 페이지 -1)
+		// limit = numperPage
 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() -1));
 		
+		// 시작블록과 끝블록 구하기
+		paging.setBeginBlock(
+				(int)(((paging.getNowPage() -1) / paging.getPagePerBlock()) * paging.getPagePerBlock() +1));
+		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+		
+		// 주의 사항
+		// endBlock 과 totalPage 중에 endBlock 이 크면 endBlock totalPage 로 지정한다.
+		if(paging.getEndBlock() > paging.getTotalPage()) {
+			paging.setEndBlock(paging.getTotalPage());
+		}
 		List<BbsVO> bbs_list = bbsService.getBbsList(paging.getOffset(), paging.getNumPerPage());
-		System.out.println(bbs_list.size());
+		mv.addObject("bbs_list", bbs_list);
+		mv.addObject("paging", paging);
 		return mv;
 	}
 	
@@ -122,7 +135,7 @@ public class BbsController {
 	}
 	
 	@GetMapping("bbs_detail.do")
-	public ModelAndView getBbs_Detail(String b_idx) {
+	public ModelAndView getBbs_Detail(String b_idx, String cPage) {
 		ModelAndView mv = new ModelAndView("bbs/detail");
 		// 조회수, 상세보기는 같이 성공해야 조회수 증가해야하기때문에 같이 묶어처리하는게 맞다(트랜잭션 처리)(나중에)
 		// 조회수 증가
@@ -136,6 +149,7 @@ public class BbsController {
 			List<CommentVO> comm_list = bbsService.getCommentList(b_idx);
 			mv.addObject("comm_list", comm_list);
 			mv.addObject("bvo", bvo);
+			mv.addObject("cPage", cPage);
 			return mv;
 		}
 		return new ModelAndView("bbs/error");
@@ -154,5 +168,32 @@ public class BbsController {
 		ModelAndView mv = new ModelAndView("redirect:bbs_detail.do");
 		int result = bbsService.getCommentDelete(c_idx);
 		return mv;
+	}
+	
+	@PostMapping("bbs_delete.do")
+	public ModelAndView getBbsDelete(@ModelAttribute("cPage")String cPage, @ModelAttribute("b_idx")String b_idx) {
+		return new ModelAndView("bbs/delete");
+	}
+	
+	@PostMapping("bbs_delete_ok.do")
+	public ModelAndView getBbsDeleteOK(@RequestParam("pwd")String pwd, @ModelAttribute("cpage")String cPage, @ModelAttribute("b_idx")String b_idx) {
+		ModelAndView mv = new ModelAndView();
+		// 비밀번호 체크
+		BbsVO bvo = bbsService.getBbsDetail(b_idx);
+		String dpwd = bvo.getPwd();
+		if(! passwordEncoder.matches(pwd, dpwd)) {
+			mv.setViewName("bbs/delete");
+			mv.addObject("pwdchk", "fail");
+			return mv;
+		}else {
+			// 원글 삭제 (댓글있는 원글을 그냥 삭제하면 DB 외래키 때문에 오류 발생)
+			// 그래서 mapper 에서 active 컬럼의 값을 1로 변경한다.
+			int result = bbsService.getBbsDelete(b_idx);
+			if(result > 0) {
+				mv.setViewName("redirect:bbs_list.do");
+				return mv;
+			}
+		}
+		return new ModelAndView("bbs/error");
 	}
 }
