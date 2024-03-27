@@ -1,5 +1,6 @@
 package com.ict.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,22 +15,50 @@ public class BoardDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public int getTotalCount() {
-		return 0;
+		try {
+			return sqlSessionTemplate.selectOne("board.count");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
 	}
 
 	public List<BoardVO> getBoardList(int offset, int limit) {
+		try {
+			Map<String, Integer> map = new HashMap<String, Integer>();  
+			map.put("offset", offset);
+			map.put("limit", limit);
+			return sqlSessionTemplate.selectList("board.board_list", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 
 	public int getBoardInsert(BoardVO bovo) {
-		return 0;
+		try {
+			return sqlSessionTemplate.insert("board.board_insert", bovo);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
 	}
 
 	public int getBoardHit(String bo_idx) {
-		return 0;
+		try {
+			return sqlSessionTemplate.update("board.board_hit", bo_idx); 
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
 	}
 
 	public BoardVO getBoardDetail(String bo_idx) {
+		try {
+			return sqlSessionTemplate.selectOne("board.board_detail", bo_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return null;
 	}
 

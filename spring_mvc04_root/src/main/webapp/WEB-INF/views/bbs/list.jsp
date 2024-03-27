@@ -101,7 +101,7 @@ table tfoot ol.paging li a:hover {
 					<c:otherwise>
 						<c:forEach var="k" items="${bbs_list }" varStatus="vs">
 							<tr>
-								<td>${vs.count }</td>
+								<td>${paging.totalRecord - ((paging.nowPage -1) * paging.numPerPage + vs.index) }</td>
 								<!-- 2페이지에서 댓글달고 목록눌르면 다시 1페이지로 가기때문에 detail 에도 &cPage=${paging.nowPage} 넘겨줘야된다. -->
 								<td>
 									<c:choose>

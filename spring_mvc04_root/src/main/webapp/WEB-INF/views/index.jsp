@@ -24,6 +24,6 @@
 	<button onclick="geustbook_go()">guestbook</button>
 	<button onclick="geustbook2_go()">guestbook2</button>
 	<button onclick="bbs_go()">게시판</button>
-	<button onclick="board_go()">게시판</button>
+	<button onclick="board_go()">게시판2</button>
 </body>
 </html>

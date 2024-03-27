@@ -17,27 +17,27 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int getTotalCount() {
-		return 0;
+		return boardDAO.getTotalCount();
 	}
 
 	@Override
 	public List<BoardVO> getBoardList(int offset, int limit) {
-		return null;
+		return boardDAO.getBoardList(offset, limit);
 	}
 
 	@Override
 	public int getBoardInsert(BoardVO bovo) {
-		return 0;
+		return boardDAO.getBoardInsert(bovo);
 	}
 
 	@Override
 	public int getBoardHit(String bo_idx) {
-		return 0;
+		return boardDAO.getBoardHit(bo_idx);
 	}
 
 	@Override
 	public BoardVO getBoardDetail(String bo_idx) {
-		return null;
+		return boardDAO.getBoardDetail(bo_idx);
 	}
 
 	@Override
