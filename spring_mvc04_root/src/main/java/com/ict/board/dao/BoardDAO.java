@@ -63,10 +63,42 @@ public class BoardDAO {
 	}
 
 	public int getLevUpdate(Map<String, Integer> map) {
-		return 0;
+		try {
+			return sqlSessionTemplate.update("board.levupdate", map);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
 	}
 
 	public int getAnsInsert(BoardVO bovo) {
-		return 0;
+		try {
+			return sqlSessionTemplate.insert("board.ans_insert", bovo);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+	
+	public int getBoardDelete(BoardVO bovo) {
+		try {
+			if(bovo.getStep().equals("0")) {
+				return sqlSessionTemplate.update("board.board_delete", bovo);
+			}else {
+				return sqlSessionTemplate.delete("board.board_ans_delete", bovo);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
+	}
+
+	public int getBoardUpdate(BoardVO bovo) {
+		try {
+			return sqlSessionTemplate.update("board.board_update", bovo);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return -1;
 	}
 }

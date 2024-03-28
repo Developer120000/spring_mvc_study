@@ -1,7 +1,9 @@
 package com.ict.board.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -102,13 +104,12 @@ public class BoardController {
 				byte[] in = file.getBytes();
 				File out = new File(path, f_name);
 				FileCopyUtils.copy(in, out);
-				
-				bovo.setPwd(passwordEncoder.encode(bovo.getPwd()));
-				
-				int result = boardService.getBoardInsert(bovo);
-				if(result > 0) {
-					return mv;
-				}
+			}	
+			bovo.setPwd(passwordEncoder.encode(bovo.getPwd()));
+			
+			int result = boardService.getBoardInsert(bovo);
+			if(result > 0) {
+				return mv;
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -126,11 +127,149 @@ public class BoardController {
 		BoardVO bovo = boardService.getBoardDetail(bo_idx);
 		
 		if(result > 0 && bovo != null) {
-			mv.addObject(bovo);
+			mv.addObject("bovo",bovo);
 			return mv;
 		}
 		
 		return new ModelAndView("board/error");
+	}
+	
+	@PostMapping("ans_write.do")
+	public ModelAndView getBoardAnsWrite(@ModelAttribute("cPage")String cPage, @ModelAttribute("bo_idx")String bo_idx) {
+		return new ModelAndView("board/ans_write");
+	}
+	
+	@PostMapping("board_ans_write_ok.do")
+	public ModelAndView getBoardAnsWriteOK(@ModelAttribute("cPage")String cPage, BoardVO bovo, HttpServletRequest request) {
+		try {
+			// 답글에서만 처리 할 일
+			// 원글의 groups, step, lev 를 가져와라
+			BoardVO bovo2 = boardService.getBoardDetail(bovo.getBo_idx());
+			
+			int groups = Integer.parseInt(bovo2.getGroups());
+			int step = Integer.parseInt(bovo2.getStep());
+			int lev = Integer.parseInt(bovo2.getLev());
+			
+			// step, lev 를 하나씩 올리자
+			step++;
+			lev++;
+			
+			// DB 에서 lev 를 업데이트 하자
+			// ** groups 이 같은 원글,댓글을 찾아서 기존 데이터의 레벨이 같거나 크면 기존 데이터의 lev 증가
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("groups", groups);
+			map.put("lev", lev);
+			
+			int result = boardService.getLevUpdate(map);
+			bovo.setGroups(String.valueOf(groups));
+			bovo.setStep(String.valueOf(step));
+			bovo.setLev(String.valueOf(lev));
+			
+			ModelAndView mv = new ModelAndView("redirect:board_list.do");
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload");
+			MultipartFile file = bovo.getFile();
+			if(file.isEmpty()) {
+				bovo.setF_name("");
+			}else {
+				UUID uuid = UUID.randomUUID();
+				String f_name = uuid.toString() + "_" + file.getOriginalFilename();
+				bovo.setF_name(f_name);
+				
+				byte[] in = file.getBytes();
+				File out = new File(path, f_name);
+				FileCopyUtils.copy(in, out);
+			}	
+			
+			bovo.setPwd(passwordEncoder.encode(bovo.getPwd()));
+			
+			int result2 = boardService.getAnsInsert(bovo);
+			if(result2 > 0) {
+				return mv;
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return new ModelAndView("board/error");
+	}
+	
+	@PostMapping("board_delete.do")
+	public ModelAndView getBoardDelete(@ModelAttribute("cPage")String cPage, @ModelAttribute("bo_idx")String bo_idx) {
+		return new ModelAndView("board/delete");
+	}
+
+	@PostMapping("board_delete_ok.do")
+	public ModelAndView getBoardDeleteOK(@ModelAttribute("cPage")String cPage, @ModelAttribute("bo_idx")String bo_idx, BoardVO bovo) {
+		ModelAndView mv = new ModelAndView();
+		
+		// 비밀번호 체크
+		BoardVO bovo2 = boardService.getBoardDetail(bovo.getBo_idx());
+		String dpwd = bovo2.getPwd();
+		if (!passwordEncoder.matches(bovo.getPwd(), dpwd)) {
+			mv.setViewName("board/delete");
+			mv.addObject("pwdchk", "fail");
+			return mv;
+		} else {
+			// 원글 삭제 (댓글있는 원글을 그냥 삭제하면 DB 외래키 때문에 오류 발생)
+			// 그래서 mapper 에서 active 컬럼의 값을 1로 변경한다.
+			int result = boardService.getBoardDelete(bovo2);
+			if (result > 0) {
+				mv.setViewName("redirect:board_list.do");
+				return mv;
+			}
+		}
+		return new ModelAndView("board/error");
+	}
+	
+	@PostMapping("board_update.do")
+	public ModelAndView getBoardUpdate(@ModelAttribute("cPage")String cPage, @ModelAttribute("bo_idx")String bo_idx) {
+		ModelAndView mv = new ModelAndView("board/update");
+		BoardVO bovo = boardService.getBoardDetail(bo_idx);
+		if(bovo != null) {
+			mv.addObject("bovo", bovo);
+			return mv;
+		}
+		
+		return new ModelAndView("board/update");
+	}
+	
+	@PostMapping("board_update_ok.do")
+	public ModelAndView getBoardUpdateOK(@ModelAttribute("cPage")String cPage, @ModelAttribute("bo_idx")String bo_idx, BoardVO bovo, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		BoardVO bovo2 = boardService.getBoardDetail(bovo.getBo_idx());
+		String dpwd = bovo2.getPwd();
+		
+		if(! passwordEncoder.matches(bovo.getPwd(), dpwd)) {
+			mv.setViewName("board/update");
+			mv.addObject("pwdchk", "fail");
+			mv.addObject("bovo2", bovo);
+			return mv;
+		}else {
+			try {
+				String path = request.getSession().getServletContext().getRealPath("/resources/upload");
+				MultipartFile file = bovo.getFile();
+				if(file.isEmpty()) {
+					bovo.setF_name(bovo.getOld_f_name());
+				}else {
+					UUID uuid = UUID.randomUUID();
+					String f_name = uuid.toString() + "_" + file.getOriginalFilename();
+					bovo.setF_name(f_name);
+					
+					byte[] in = file.getBytes();
+					File out = new File(path, f_name);
+					FileCopyUtils.copy(in, out);
+				}
+				int result = boardService.getBoardUpdate(bovo);
+				if(result > 0) {
+					mv.setViewName("redirect:board_detail.do");
+					return mv;
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+		return new ModelAndView("board.error");
 	}
 }
 

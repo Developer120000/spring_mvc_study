@@ -42,12 +42,22 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public int getLevUpdate(Map<String, Integer> map) {
-		return 0;
+		return boardDAO.getLevUpdate(map);
 	}
 
 	@Override
 	public int getAnsInsert(BoardVO bovo) {
-		return 0;
+		return boardDAO.getAnsInsert(bovo);
+	}
+
+	@Override
+	public int getBoardDelete(BoardVO bovo) {
+		return boardDAO.getBoardDelete(bovo);
+	}
+
+	@Override
+	public int getBoardUpdate(BoardVO bovo) {
+		return boardDAO.getBoardUpdate(bovo);
 	}
 
 }
