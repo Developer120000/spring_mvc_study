@@ -29,4 +29,13 @@
 		<beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean> 
 	
+	<beans:bean id="log_inter" class="com.ict.common.LoginInterseptor" />
+	<interceptors>
+		<interceptor>
+			<mapping path="/gb_list.do"/> <!-- 들어가려고하면 로그인페이지로 이동 -->
+			<mapping path="/board_list.do"/>
+			<mapping path="/bbs_write.do"/>
+			<beans:ref bean="log_inter" />
+		</interceptor>
+	</interceptors>
 </beans:beans>

@@ -12,6 +12,7 @@ public interface ShopService {
 	public CartVO getCartChk(String m_id, String p_num);
 	public int getCartInsert(CartVO cartVO) throws Exception;
 	public int getCartUpdate(CartVO cartVO) throws Exception;
-	public int getCartEdit(CartVO cavo) throws Exception;
+	public int getCartEdit(CartVO cavo) throws Exception; 
 	public int getCartDelete(String cart_idx) throws Exception;
+	public int getProductInsert(ShopVO svo) throws Exception;
 }

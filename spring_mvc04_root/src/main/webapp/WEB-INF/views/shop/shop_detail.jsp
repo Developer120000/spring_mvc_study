@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>제품상세보기</title>
 <style type="text/css">
 table {
     margin: 10px auto;
@@ -24,14 +24,13 @@ table, th, td {
 <script type="text/javascript">
     // 장바구니 담기
     function add_cart() {
-    	// 변수를 한번에 넣어서 해도 되는데 가끔 오류나서 따로 빼서 함
-//     	location.href="shop_addCart.do?shop_idx=${svo.shop_idx}"
         const shop_idx = "${svo.shop_idx}";
-        location.href="shop_addCart.do?shop_idx=" + shop_idx;
+     	// +shop_idx => 가끔 안되는 경우가 있어서 변수로 빼놓고 넣는다.
+        location.href="shop_addCart.do?shop_idx="+shop_idx; 
     }
     // 장바구니 보기
     function show_cart() {
-    	location.href="shop_showCart.do";
+     	location.href="shop_showCart.do";   
     }
 </script>
 </head>
@@ -56,8 +55,8 @@ table, th, td {
         </tr>
         <tr>
             <td width="40%">제품가격</td>
-            <td width="60%">시중가 : <fmt:formatNumber value="${svo.p_price }" pattern="#,##0" />원
-            <font color="red">(할인가: <fmt:formatNumber value="${svo.p_saleprice }" pattern="#,##0" />원)</font></td>    
+            <td width="60%">시중가 : <fmt:formatNumber value="${svo.p_price }" pattern="#,##0"/>원
+            <font color="red">(할인가: <fmt:formatNumber value="${svo.p_saleprice }" pattern="#,##0"/>원)</font></td>    
         </tr>
         <tr>
             <td>제품설명</td>

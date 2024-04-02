@@ -10,51 +10,53 @@ import com.ict.shop.dao.ShopDAO;
 import com.ict.shop.dao.ShopVO;
 
 @Service
-public class ShopServiceImpl implements ShopService{
-
+public class ShopServiceImpl  implements ShopService{
 	@Autowired
-	private ShopDAO shopDAO;
-
+	private ShopDAO shopdao;
+	
+	
 	@Override
 	public List<ShopVO> getShopList(String category) throws Exception {
-		return shopDAO.getShopList(category);
+		return shopdao.getShopList(category);
 	}
 
 	@Override
 	public ShopVO getShopDetail(String shop_idx) throws Exception {
-		return shopDAO.getShopDetail(shop_idx);
+		return shopdao.getShopDetail(shop_idx);
 	}
 
-	
 	@Override
 	public CartVO getCartChk(String m_id, String p_num) {
-		return shopDAO.getCartChk(m_id, p_num);
+		return shopdao.getCartChk(m_id, p_num);
 	}
 
 	@Override
 	public int getCartInsert(CartVO cartVO) throws Exception {
-		return shopDAO.getCartInsert(cartVO);
+		return shopdao.getCartInsert(cartVO);
 	}
 
 	@Override
 	public int getCartUpdate(CartVO cartVO) throws Exception {
-		return shopDAO.getCartUpdate(cartVO);
+		return shopdao.getCartUpdate(cartVO);
 	}
 	
 	@Override
 	public List<CartVO> getCartList(String m_id) throws Exception {
-		return shopDAO.getCartList(m_id);
+		return shopdao.getCartList(m_id);
 	}
-
 	@Override
 	public int getCartEdit(CartVO cavo) throws Exception {
-		return shopDAO.getCartEdit(cavo);
+		return shopdao.getCartEdit(cavo);
 	}
 	
 	@Override
 	public int getCartDelete(String cart_idx) throws Exception {
-		return shopDAO.getCartDelete(cart_idx);
+		return shopdao.getCartDelete(cart_idx);
 	}
-
-
+	@Override
+	public int getProductInsert(ShopVO svo) throws Exception {
+		return shopdao.getProductInsert(svo);
+	}
+	
+	
 }

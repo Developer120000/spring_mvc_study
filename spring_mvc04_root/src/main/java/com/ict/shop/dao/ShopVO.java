@@ -4,27 +4,32 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ShopVO {
 	private String shop_idx, category, p_num, p_name, p_company, p_image_s, p_image_l, p_content, p_date;
-	// 계s
-	private int p_price, p_saleprice;
-	// 파일 업로드	
-	private MultipartFile file_s, file_l;
-	// 장바구니
-	private int quant, totalprice;
 	
-	// 세일 가격으로 세일 퍼센트 계산 (할인율)
+	// 계산을 위한 것
+	private int p_price, p_saleprice;
+	
+	// 파일 업로드
+	private MultipartFile file_s, file_l;
+	
+	// 장바구니
+	private int quant, totalPrice ;
+	
+	// 세일가격으로 세일 퍼센트 계산(할인률)
 	public int getPercent() {
+		// 들어올땐 더블 나갈때는 인트여서 형변환 해준다.
 		double per = (p_price - p_saleprice) * 100 / p_price;
 		return (int)(per);
 	}
 	
-	// 장바구니에서 수량이 변경되면 총 금액 변경되어야 한다.
+	// 장바구니에서 수량이 변경되면 총 금액도 변경되어야 한다.
 	public void setQuant(int quant) {
 		this.quant = quant;
 		// 세일 가격 계산
-		setTotalprice(quant * p_saleprice);
+		setTotalPrice(quant * p_saleprice);
 	}
 	
-
+	
+	
 	public MultipartFile getFile_s() {
 		return file_s;
 	}
@@ -41,36 +46,35 @@ public class ShopVO {
 		this.file_l = file_l;
 	}
 
-	public int getTotalprice() {
-		return totalprice;
+	public int getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setTotalprice(int totalprice) {
-		this.totalprice = totalprice;
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public int getQuant() {
 		return quant;
 	}
 
+	
+	 public int getP_price() { return p_price; }
+
+		public void setP_price(int p_price) {
+			this.p_price = p_price;
+		}
+
+		public int getP_saleprice() {
+			return p_saleprice;
+		}
+
+		public void setP_saleprice(int p_saleprice) {
+			this.p_saleprice = p_saleprice;
+		}
+
 	public String getShop_idx() {
 		return shop_idx;
-	}
-	
-	public int getP_price() {
-		return p_price;
-	}
-
-	public void setP_price(int p_price) {
-		this.p_price = p_price;
-	}
-
-	public int getP_saleprice() {
-		return p_saleprice;
-	}
-
-	public void setP_saleprice(int p_saleprice) {
-		this.p_saleprice = p_saleprice;
 	}
 
 	public void setShop_idx(String shop_idx) {
@@ -109,6 +113,7 @@ public class ShopVO {
 		this.p_company = p_company;
 	}
 
+
 	public String getP_image_s() {
 		return p_image_s;
 	}
@@ -140,4 +145,5 @@ public class ShopVO {
 	public void setP_date(String p_date) {
 		this.p_date = p_date;
 	}
+	
 }

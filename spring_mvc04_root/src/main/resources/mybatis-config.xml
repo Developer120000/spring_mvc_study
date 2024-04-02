@@ -21,6 +21,7 @@
 		<typeAlias type="com.ict.board.dao.BoardVO" alias="bovo" />
 		<typeAlias type="com.ict.shop.dao.ShopVO" alias="svo" />
 		<typeAlias type="com.ict.shop.dao.CartVO" alias="cavo" />
+		<typeAlias type="com.ict.member.dao.MemberVO" alias="mvo" />
 	</typeAliases>
 	
 	<!-- 메퍼 위치 -->
@@ -30,5 +31,6 @@
 		<mapper resource="mappers/bbs-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml" />
 		<mapper resource="mappers/shop-mapper.xml" />
+		<mapper resource="mappers/member-mapper.xml" />
 	</mappers>
 </configuration>

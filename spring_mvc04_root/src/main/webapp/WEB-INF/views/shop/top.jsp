@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,36 @@ div#log {
 			<a href="shop_list.do?category=com001">컴퓨터</a> | <a
 				href="shop_list.do?category=ele002">가전 제품</a> | <a
 				href="shop_list.do?category=sp003">스포츠</a>
+			<div id="log">
+				<c:choose>
+					<c:when test="${loginChk == 'ok' }">
+						${mvo2.m_name }님 환영합니다.
+				<c:if test="${admin == 'ok' }">
+							<a href="shop_product_insertForm.do">상품등록</a>
+						</c:if>
+						<a href="member_logout.do">로그아웃</a>
+						<c:if test="${admin != 'ok'}">
+						| <a href="shop_showCart.do">장바구니</a>
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<a href="loginForm.do">로그인</a>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</div>
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
