@@ -11,28 +11,30 @@ import com.ict.member.dao.MemberVO;
 @Service
 public class MemberServiceImpl implements MemberService{
 	@Autowired
-	private MemberDAO memberdao;
+	private MemberDAO memberDAO;
 	
-
 	@Override
 	public MemberVO getLogin(MemberVO mvo) {
-		
-		return memberdao.getLogin(mvo);
+		return memberDAO.getLogin(mvo);
 	}
 	
 	@Override
 	public List<MemberVO> getMemberList() {
-		return memberdao.getMemberList();
+		return memberDAO.getMemberList();
 	}
 	
 	@Override
 	public String getIdChk(String m_id) {
-		return memberdao.getIdChk(m_id);
+		return memberDAO.getIdChk(m_id);
 	}
 	
 	@Override
 	public int getAjaxJoin(MemberVO mvo) {
-		return memberdao.getAjaxJoin(mvo);
+		return memberDAO.getAjaxJoin(mvo);
 	}
 
+	@Override
+	public int getAjaxDelete(String m_idx) {
+		return memberDAO.getAjaxDelete(m_idx);
+	}
 }

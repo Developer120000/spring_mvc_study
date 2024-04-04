@@ -2,7 +2,7 @@ package com.ict.member.dao;
 
 public class MemberVO {
 	private String m_idx, m_id, m_pw, m_name, m_age, m_reg;
-	
+
 	public String getM_idx() {
 		return m_idx;
 	}
@@ -50,6 +50,5 @@ public class MemberVO {
 	public void setM_reg(String m_reg) {
 		this.m_reg = m_reg;
 	}
-	
 	
 }

@@ -82,4 +82,14 @@ public class AjaxDBController {
 		return String.valueOf(result);
 		
 	}
+
+	@RequestMapping(value = "getAjaxDelete.do", produces = "text/plain; charset=utf-8")
+	@ResponseBody
+	public String getAjaxDelete(String m_idx) {
+		int result = memberService.getAjaxDelete(m_idx);
+		return String.valueOf(result);
+		
+	}
+	
+	
 }

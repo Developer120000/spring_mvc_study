@@ -13,13 +13,12 @@ public class MemberDAO {
 	
 	public MemberVO getLogin(MemberVO mvo) {
 		try {
-			return sqlSessionTemplate.selectOne("member.login", mvo);
+		return sqlSessionTemplate.selectOne("member.login", mvo);	
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return null;
 	}
-	
 	public List<MemberVO> getMemberList() {
 		try {
 			return sqlSessionTemplate.selectList("member.ajax_list");
@@ -31,13 +30,13 @@ public class MemberDAO {
 	
 	public String getIdChk(String m_id) {
 		try {
-			int result = sqlSessionTemplate.selectOne("member.idchk", m_id);
-			// m_id 가 존재하면
-			if(result > 0) {
-				return "0";
-			}
-			// m_id 가 존재하지 않으면
-			return "1";
+		  	int result = sqlSessionTemplate.selectOne("member.idchk", m_id);
+		  	// m_id가 존재하면 
+		  	if(result>0) {
+		  		return "0";
+		  	}
+		  	// m_id가 존재하지 않으면 
+		  	return "1" ;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -50,8 +49,27 @@ public class MemberDAO {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return -1;
+		return 0;
 	}
-
+	
+	public int getAjaxDelete(String m_idx) {
+		try {
+			return sqlSessionTemplate.delete("member.delete", m_idx);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return 0;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

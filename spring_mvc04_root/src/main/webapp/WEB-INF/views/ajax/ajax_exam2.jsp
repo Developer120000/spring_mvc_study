@@ -38,9 +38,8 @@ $(document).ready(function() {
 					tbody += "<td>" + m_reg + "</td>";
 					
 					//	삭제하기 위해서 idx 를 가져가야한다.
-					tbody += "<td><button id='del' name='" + 
-								$(this).find("m_idx").text()
-								+ "'>삭제</button></td>";
+					tbody += "<td><input type='button' value='삭제' id='del' name='" + 
+								$(this).find("m_idx").text() + "'></td>";
 					
 					tbody += "</tr>";
 				});
@@ -95,7 +94,7 @@ $(document).ready(function() {
 				}else if (data == 1) {
 					//	가입성공
 					$("#tbody").empty();
-					
+					getList();
 				}
 			},
 			error : function() {
@@ -103,6 +102,27 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	// 테이블 안에 있는 del 버튼을 클리하면 함수 발동
+	$("table").on("click","#del", function() {
+		$.ajax({
+			url : "getAjaxDelete.do",
+			data : "m_idx="+$(this).attr("name"),
+			method : "post",
+			dataType : "text",
+			success : function(data) {
+				if (data == 0) {
+					alert("삭제실패");
+				}else if (data == 1) {
+					$("#tbody").empty();
+					getList();
+				}
+			},
+			error : function() {
+				alert("실패");
+			}
+		});
+	})
 	
 	//	다 읽고나서 function 실행
 	getList();
@@ -130,7 +150,7 @@ $(document).ready(function() {
                 </tr>
             </tbody>
             <tfoot>
-                <tr><td colspan="7" align="center"><button id="join_btn" disabled>가입하기</button></td></tr>
+                <tr><td colspan="7" align="center"><input type="button" value="가입하기" id="join_btn" disabled></td></tr>
             </tfoot>
         </table>
     </form>

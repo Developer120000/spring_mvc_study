@@ -6,10 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function guestbook_go() {
+	function geustbook_go() {
 		location.href="gb_list.do";
 	}
-	function guestbook2_go() {
+	function geustbook2_go() {
 		location.href="gb2_list.do";
 	}
 	function bbs_go() {
@@ -30,17 +30,26 @@
 	function spring_sns_go() {
 		location.href="spring_sns_go.do";
 	}
-	
+	function dynamic_query() {
+		location.href="dynamic_query.do";
+	}
 </script>
 </head>
 <body>
-	<button onclick="guestbook_go()">GuestBook</button>
-	<button onclick="guestbook2_go()">GuestBook2</button>
+	<button onclick="geustbook_go()">guestbook</button>
+	<button onclick="geustbook2_go()">guestbook2</button>
 	<button onclick="bbs_go()">게시판</button>
 	<button onclick="board_go()">게시판2</button>
 	<button onclick="shop_go()">shop</button>
 	<button onclick="spring_ajax_go()">Spring Ajax</button>
 	<button onclick="spring_ajax_go2()">Spring Ajax2</button>
-	<button onclick="spring_sns_go()">Spring sns</button>
+	<button onclick="spring_sns_go()">Spring sns </button>
+	<button onclick="dynamic_query()">동적Query</button>
 </body>
 </html>
+
+
+
+
+
+
