@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="emp">
+	<select id="emp_list" resultType="evo">
+		select * from employees where emp_no &gt;= 10001 and emp_no &lt;= 10020 order by emp_no
+	</select>
+	<select id="emp_searchlist" parameterType="Map" resultType="evo">
+			select * from employees where
+		<choose>
+			<!-- DB 에 대문자나 소문자로 저장되어있는것을 검색값과 모두 소문자로 만들어서 비교 -->
+			<when test="searchType == 1"> Lower(emp_no) = Lower(#{searchValue})</when>
+			<when test="searchType == 2"> Lower(first_name) like concat('%', Lower(#{searchValue}), '%')</when>
+			<when test="searchType == 3"> Lower(gender) = Lower(#{searchValue})</when>
+			<when test="searchType == 4"> Lower(birth_date) like concat(Lower(#{searchValue}), '%')</when>
+		</choose>
+			 limit 20
+<!-- 		<if test="searchType == 1"> -->
+<!-- 			emp_no = #{searchValue} -->
+<!-- 		</if> -->
+	</select>
+ </mapper>

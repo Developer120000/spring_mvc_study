@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>동적쿼리페이지</h2>
+	<h1> 공 사 중 </h1>
 </body>
 </html>

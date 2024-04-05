@@ -240,6 +240,6 @@ public class SnsController {
 	
 	@RequestMapping("dynamic_query.do")
 	public ModelAndView dynamicQuery() {
-		return new ModelAndView("bbs/dynamicQuery");
+		return new ModelAndView("emp/dynamicQuery");
 	}
 }

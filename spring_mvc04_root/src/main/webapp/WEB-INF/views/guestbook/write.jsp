@@ -5,11 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title> 방 명 록 </title>
+<!-- summernote -->
+<link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
 	a { text-decoration: none;}
-	table{width: 600px; border-collapse:collapse; text-align: center;}
+	table{width: 800px; border-collapse:collapse; text-align: center;}
 	table,th,td{border: 1px solid black; padding: 3px}
-	div{width: 600px; margin:auto; text-align: center;}
+	div{width: 800px; margin:auto; text-align: center;}
+	
+	/* summernote toolbar 수정 */
+	.note-btn-group{width: auto;}
+	.note-toolbar{width: auto;}
 </style>
 <script type="text/javascript">
 	function save_go(f) {
@@ -43,7 +49,7 @@
 				</tr>
 				<tr align="center">
 					<td colspan="2">
-						<textarea rows="10" cols="60" name="content"></textarea>
+						<textarea rows="10" cols="60" id="content" name="content"></textarea>
 					</td>
 				</tr>
 				<tfoot>
@@ -58,5 +64,53 @@
 			</table>
 		</form>
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
+	<script src="resources/js/summernote-lite.js"></script>
+	<script src="resources/js/lang/summernote-ko-KR.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#content').summernote({
+				lang: "ko-KR",		// 한글 설정
+				height: 300,        // 에디터 높이
+				focus: true,        // 에디터 로딩후 포커스를 맞출지 여부
+				placeholder: '최대3000자까지 쓸 수 있습니다'	//placeholder 설정
+				callback : {
+					onImageUpload: function(files, editor) {
+						for (var i = 0; i < .length; i++) {
+							sendImage(files[i], editor);							
+						}
+					}
+				}
+			});
+		});
+		
+		function sendImage(file, edfitor) {
+			let frm = new FormData(s_file$);	
+			frm.append("s_file", file);
+			
+			$.ajax({
+				url : "saverImg.do",
+				data : frm,
+				type: "post",
+				contentType : false,
+				processData : false,
+				cache : false,
+				dataType : "json"
+			}).done(function(data) {  /* 성공했을 때랑 같은 뜻 */
+				let path = data.path;
+				let fname = data.fname;
+			$("#content").summernote("editor.insertImage", path + "/" + fname);
+			});
+		}
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
