@@ -81,33 +81,37 @@
 	<script src="resources/js/summernote-lite.js"></script>
 	<script src="resources/js/lang/summernote-ko-KR.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#content').summernote({
-				lang: "ko-KR",		// 한글 설정
-				height: 300,        // 에디터 높이
-				focus: true,        // 에디터 로딩후 포커스를 맞출지 여부
-				placeholder: '최대3000자까지 쓸 수 있습니다'	//placeholder 설정
-			});
+	$(function() {
+		$("#content").summernote({
+		    focus:false,
+			lang : 'ko-KR',
+			height : 300,
+			focus : true,
+			placeholder: '최대3000자까지 쓸 수 있습니다'	,//placeholder 설정
+			callbacks : {
+				onImageUpload : function(files, editor) {
+					for (var i = 0; i < files.length; i++) {
+							sendImage(files[i], editor);						
+					}
+				}
+			}
+	});
+});
+	
+	function sendImage(file, editor) {
+		let frm = new FormData();
+		frm.append("s_file", file);
+		$.ajax({
+			url : "saveImg.do",
+			data : frm,
+			method : "post",
+			dataType : "json"
+		}).done(function(data) {
+			let path = data.path;
+			let fname = data.fname;
+			$("#content").summernote("editor.insertImage", path+"/"+fname);
 		});
-		
-		function sendImage(file, edfitor) {
-			let frm = new FormData(s_file$);	
-			frm.append("s_file", file);
-			
-			$.ajax({
-				url : "saverImg.do",
-				data : frm,
-				type: "post",
-				contentType : false,
-				processData : false,
-				cache : false,
-				dataType : "json"
-			}).done(function(data) {  /* 성공했을 때랑 같은 뜻 */
-				let path = data.path;
-				let fname = data.fname;
-			$("#content").summernote("editor.insertImage", path + "/" + fname);
-			});
-		}
+	}
 	</script>
 </body>
 </html>

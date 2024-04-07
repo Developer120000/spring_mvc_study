@@ -12,7 +12,7 @@ import com.ict.emp.dao.EmpVO;
 public class EmpServiceImpl implements EmpService{
 	@Autowired
 	private EmpDAO empDAO;
-
+	
 	@Override
 	public List<EmpVO> getEmpList() throws Exception {
 		return empDAO.getEmpList();

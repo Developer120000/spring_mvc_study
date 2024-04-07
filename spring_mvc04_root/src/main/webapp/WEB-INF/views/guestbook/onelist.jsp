@@ -71,16 +71,18 @@
 	<script src="resources/js/summernote-lite.js"></script>
 	<script src="resources/js/lang/summernote-ko-KR.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#content').summernote({
-				lang: "ko-KR",		// 한글 설정
-				height: 300,        // 에디터 높이
-				focus: true,        // 에디터 로딩후 포커스를 맞출지 여부
-				placeholder: '최대3000자까지 쓸 수 있습니다'	//placeholder 설정
-			});
-			/* 수정금지 */
-			$('#content').summernote('disable');
+		$(function() {
+			$("#content").summernote({
+			    focus:false,
+				lang : 'ko-KR',	// 한글 설정
+				height : 300,	// 에디터 높이
+				focus : true,	// 에디터 로딩후 포커스를 맞출지 여부
+				placeholder: '최대3000자까지 쓸 수 있습니다'	,//placeholder 설정
+			  
 		});
+		/* 수정금지 */
+		$('#content').summernote('disable');
+	});
 	</script>
 </body>
 </html>

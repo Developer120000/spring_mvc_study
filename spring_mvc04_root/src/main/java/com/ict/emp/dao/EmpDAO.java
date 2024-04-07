@@ -22,6 +22,6 @@ public class EmpDAO {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchType", searchType);
 		map.put("searchValue", searchValue);
-		return sqlSessionTemplate.selectList("emp.emp_searchlist", map);
+		return sqlSessionTemplate.selectList("emp.emp_search_list", map);
 	}
 }
